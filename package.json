@@ -1,0 +1,16 @@
+{
+  "name": "loginjs",
+  "version": "1.0.0",
+  "description": "A simple User Registration and Login App",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "mkaychuks",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.12"
+  }
+}
