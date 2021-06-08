@@ -10,6 +10,7 @@ mongoose
   .connect(process.env.DB_CONNECTION, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
+    useCreateIndex: true,
   })
   .then((result) =>
     app.listen(5000, () => {

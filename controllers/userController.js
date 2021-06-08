@@ -1,6 +1,9 @@
+const User = require('../models/users');
+
 // user registration route
-const userRegistration = (req, res) => {
-  res.send('This is the user registration route');
+const userRegistration = async (req, res) => {
+  const q = await User.find();
+  res.json(q);
 };
 
 // user login route

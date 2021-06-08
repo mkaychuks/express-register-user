@@ -4,7 +4,7 @@
   "description": "A simple User Registration and Login App",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "start": "nodemon app.js"
   },
   "author": "mkaychuks",
   "license": "MIT",
