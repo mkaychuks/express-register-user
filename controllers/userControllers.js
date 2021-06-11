@@ -17,6 +17,10 @@ const userList = (req, res) => {
 const userRegister = async (req, res) => {
   const passwordHash = await hashPassword(req.body.password);
   try {
+    const existinguser = await Users.findOne({ email: req.body.email });
+    if (existinguser) {
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
     const newUser = new Users({
       username: req.body.username,
       password: passwordHash,
