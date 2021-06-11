@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 userSchema = new Schema({
   username: {
@@ -11,7 +11,6 @@ userSchema = new Schema({
   password: {
     type: String,
     minlength: 4,
-    maxlength: 25,
     required: true,
   },
   email: {
@@ -23,6 +22,6 @@ userSchema = new Schema({
   },
 });
 
-Users = mongoose.model(users, userSchema); // the model schema for mongo db atlas
+Users = mongoose.model('users', userSchema); // the model schema for mongo db atlas
 
 module.exports = Users;
