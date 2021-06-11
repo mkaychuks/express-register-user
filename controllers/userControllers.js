@@ -3,12 +3,13 @@ const hashPassword = require('../utils/hashingScript');
 
 // Total number of users
 // getting the list of all the users in the db
-const userList = (req, res) => {
-  Users.find()
-    .then((results) => res.status(200).json({ success: true, data: results }))
-    .catch((err) =>
-      res.status(500).json({ success: false, message: 'internal server error' })
-    );
+const userList = async (req, res) => {
+  try {
+    const allUsers = await Users.find();
+    res.status(200).json({ success: true, data: allUsers });
+  } catch (error) {
+    res.status(500).send('Internal Server error');
+  }
 };
 
 // Registration
@@ -17,19 +18,20 @@ const userList = (req, res) => {
 const userRegister = async (req, res) => {
   const passwordHash = await hashPassword(req.body.password);
   try {
-    const existinguser = await Users.findOne({ email: req.body.email });
-    if (existinguser) {
-      res.status(500).json({ message: 'Internal Server Error' });
+    const existingUser = await Users.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      res.status(500).json({ message: 'Internal Sever Error' });
     }
+
     const newUser = new Users({
       username: req.body.username,
       password: passwordHash,
       email: req.body.email,
     });
-    newUser
-      .save()
-      .then((result) => res.status(201).json(result))
-      .catch((err) => res.status(500).json({ message: err }));
+
+    const saveUser = await newUser.save();
+    res.status(201).json({ success: true, data: saveUser });
   } catch (error) {
     console.error(error);
   }
