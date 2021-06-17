@@ -44,7 +44,7 @@ const userRegister = async (req, res) => {
 const userLogin = async (req, res) => {
   try {
     const user = await Users.findOne({ username: req.body.username });
-    const q = await comparePassword(req.body.password, user.password);
+    const q = await comparePassword(req.body.password, user.password); // utilizing the hashingscript I created in the utils folder
     if (q) {
       res
         .status(200)
