@@ -13,9 +13,10 @@ const userList = async (req, res) => {
   }
 };
 
-// Registration
-// this controller handles the registration of users in the DB
-// also hashes the password of the registered user.
+/* Registration
+this controller handles the registration of users in the DB
+also hashes the password of the registered user.
+*/
 const userRegister = async (req, res) => {
   const passwordHash = await hashPassword(req.body.password);
   try {
@@ -38,9 +39,10 @@ const userRegister = async (req, res) => {
   }
 };
 
-// User Log in
-// this controller handles the logging in of users in the DB
-// also checks the password input against the hashed password of the registered user.
+/* User Log in
+this controller handles the logging in of users in the DB
+ also checks the password input against the hashed password of the registered user. 
+*/
 const userLogin = async (req, res) => {
   try {
     const user = await Users.findOne({ username: req.body.username });

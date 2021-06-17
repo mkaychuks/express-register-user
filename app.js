@@ -1,7 +1,7 @@
 const express = require('express'); // import the express module
 const mongoose = require('mongoose'); // import mongoose package
 require('dotenv/config');
-const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes/userRouter'); // import the Routes from the routes folder
 
 const app = express(); // express init app
 
