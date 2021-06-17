@@ -1,5 +1,6 @@
 const Users = require('../models/usersModel');
-const hashPassword = require('../utils/hashingScript');
+const { hashPassword, comparePassword } = require('../utils/hashingScript');
+const bcrypt = require('bcrypt');
 
 // Total number of users
 // getting the list of all the users in the db
@@ -21,7 +22,7 @@ const userRegister = async (req, res) => {
     const existingUser = await Users.findOne({ email: req.body.email });
 
     if (existingUser) {
-      res.status(500).json({ message: 'Internal Sever Error' });
+      res.status(500).json({ message: 'User already exists' });
     }
 
     const newUser = new Users({
@@ -37,4 +38,25 @@ const userRegister = async (req, res) => {
   }
 };
 
-module.exports = { userList, userRegister };
+// User Log in
+// this controller handles the logging in of users in the DB
+// also checks the password input against the hashed password of the registered user.
+const userLogin = async (req, res) => {
+  try {
+    const user = await Users.findOne({ username: req.body.username });
+    const q = await comparePassword(req.body.password, user.password);
+    if (q) {
+      res
+        .status(200)
+        .send({ success: true, message: 'Successfully logged in' });
+    } else {
+      res
+        .status(400)
+        .send({ success: false, message: 'Invalid login credentials' });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+module.exports = { userList, userRegister, userLogin };
