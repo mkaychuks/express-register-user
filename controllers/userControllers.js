@@ -1,6 +1,5 @@
 const Users = require('../models/usersModel');
 const { hashPassword, comparePassword } = require('../utils/hashingScript');
-const bcrypt = require('bcrypt');
 
 // Total number of users
 // getting the list of all the users in the db
