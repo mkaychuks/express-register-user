@@ -49,11 +49,11 @@ const userLogin = async (req, res) => {
     if (q) {
       res
         .status(200)
-        .send({ success: true, message: 'Successfully logged in' });
+        .json({ success: true, message: 'Successfully logged in' });
     } else {
       res
         .status(400)
-        .send({ success: false, message: 'Invalid login credentials' });
+        .json({ success: false, message: 'Invalid login credentials' });
     }
   } catch (error) {
     console.log(error.message);

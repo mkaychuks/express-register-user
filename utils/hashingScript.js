@@ -14,7 +14,9 @@ const hashPassword = async (password) => {
   }
 };
 
-// comparing a password for security checks
+/* This function handles checking of user stored hashed-password against req.body.password input
+by an existing user in DB when trying to log in
+*/
 const comparePassword = async (password, registerPassword) => {
   try {
     const correctCheck = await bcrypt.compare(password, registerPassword);
